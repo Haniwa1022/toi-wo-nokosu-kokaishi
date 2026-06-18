@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>問いを残す航海士</title>
+<meta name="description" content="問いから始めて、形にするところまで、一緒に。SNS・note・Webサイトの運用を、隣で伴走する「問いを残す航海士」の拠点です。">
+<meta name="theme-color" content="#E7ECED">
+<!-- SNS・noteでURLを貼ったときの見え方（OGP） -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="問いを残す航海士">
+<meta property="og:description" content="問いから始めて、形にするところまで、一緒に。SNS・note・Webの運用を、隣で。">
+<meta property="og:url" content="【公開後のサイトURL】">
+<meta property="og:image" content="【シェア画像のURL（1200×630px・任意）】">
+<meta name="twitter:card" content="summary_large_image">
+<!-- ファビコン（水平線のマーク・外部ファイル不要） -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23E7ECED'/%3E%3Cline x1='5' y1='18' x2='27' y2='18' stroke='%2313303A' stroke-width='1.4'/%3E%3Ccircle cx='16' cy='18' r='1.8' fill='%23E0B36A'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --fog:#E7ECED;       /* 背景・海の霧 */
+    --sky:#EEF2F2;       /* 空 */
+    --sea:#DBE5E6;       /* 海(ほんの少し深く) */
+    --panel:#EFF3F3;     /* 記録のカード */
+    --deep:#13303A;      /* 深い海＝本文の色 */
+    --ink2:#2E555F;      /* 補助テキスト */
+    --mist:#7C949A;      /* かすれた文字・キャプション */
+    --line:#B7C7CA;      /* 細い線 */
+    --glow:#F6E7C9;      /* 夜明けの光(温かさ) */
+    --glow2:#EBCF9E;
+    --white:#FBFCFC;
+    --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+    --gothic:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","YuGothic","Noto Sans JP",system-ui,sans-serif;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    font-family:var(--gothic);
+    color:var(--deep);
+    background:var(--fog);
+    line-height:1.85;
+    font-size:16px;
+    letter-spacing:.02em;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  .wrap{max-width:600px;margin:0 auto;padding:0 24px;}
+
+  /* ── 水平線(このページの背骨) ───────────────── */
+  .horizon{
+    position:relative;height:1px;
+    background:var(--line);
+    max-width:560px;margin:0 auto;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent);
+            mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent);
+  }
+  .horizon::after{
+    content:"";position:absolute;left:0;right:0;top:-1px;height:3px;
+    background:var(--glow);opacity:.5;filter:blur(3px);
+  }
+
+  /* ── ヒーロー：水平線の上に名乗り ───────────────── */
+  .hero{
+    position:relative;
+    min-height:88vh;min-height:88svh;
+    display:flex;flex-direction:column;justify-content:center;
+    text-align:center;
+    padding:64px 24px 40px;
+    overflow:hidden;
+  }
+  .hero::before{ /* 空→水平線→海 のグラデーション */
+    content:"";position:absolute;inset:0;z-index:0;
+    background:
+      radial-gradient(120% 60% at 50% 58%, var(--glow) 0%, rgba(246,231,201,0) 42%),
+      linear-gradient(180deg, var(--sky) 0%, var(--sky) 50%, var(--sea) 58%, var(--sea) 100%);
+  }
+  .hero::after{ /* 水平線そのもの */
+    content:"";position:absolute;left:0;right:0;top:58%;z-index:1;height:1px;
+    background:linear-gradient(90deg,transparent,var(--line) 12%,var(--ink2) 50%,var(--line) 88%,transparent);
+    box-shadow:0 0 14px 1px rgba(246,231,201,.85);
+    transform:scaleX(.2);opacity:0;
+    animation:drawline 1.6s .25s cubic-bezier(.2,.7,.2,1) forwards;
+  }
+  .hero-inner{position:relative;z-index:2;}
+  .eyebrow{
+    font-size:12px;letter-spacing:.42em;color:var(--mist);
+    margin-bottom:28px;padding-left:.42em;
+    opacity:0;animation:rise .9s .5s ease forwards;
+  }
+  h1.title{
+    font-family:var(--mincho);
+    font-weight:600;
+    font-size:clamp(38px,12.5vw,62px);
+    line-height:1.32;letter-spacing:.06em;
+    color:var(--deep);
+    margin-bottom:46px;
+    opacity:0;animation:rise 1s .65s ease forwards;
+  }
+  h1.title .q{ /* 「問い」を少しだけ際立たせる */
+    position:relative;
+  }
+  h1.title .q::after{
+    content:"";position:absolute;left:-.04em;right:-.04em;bottom:.06em;height:.5em;
+    background:var(--glow);opacity:.45;z-index:-1;border-radius:2px;
+  }
+  .lede{
+    font-family:var(--mincho);
+    font-size:clamp(16px,4.6vw,20px);
+    line-height:2.05;color:var(--ink2);letter-spacing:.05em;
+    opacity:0;animation:rise 1s 1.05s ease forwards;
+  }
+  .scrollcue{
+    margin-top:54px;color:var(--mist);font-size:13px;letter-spacing:.3em;
+    opacity:0;animation:rise 1s 1.5s ease forwards;
+  }
+  .scrollcue span{display:block;margin-top:8px;font-size:16px;animation:bob 2.6s 2s ease-in-out infinite;}
+
+  /* ── セクション共通 ───────────────── */
+  .section{padding:62px 0;}
+  .section-rule{margin:0 0 54px;}
+  .label{
+    font-family:var(--gothic);
+    font-size:12px;letter-spacing:.34em;color:var(--mist);
+    margin-bottom:26px;padding-left:.34em;
+  }
+  h2{
+    font-family:var(--mincho);font-weight:600;
+    font-size:clamp(22px,6.2vw,28px);line-height:1.6;letter-spacing:.04em;
+    color:var(--deep);margin-bottom:30px;
+  }
+  p{margin-bottom:18px;}
+  p:last-child{margin-bottom:0;}
+  .num{font-family:var(--mincho);font-size:1.18em;color:var(--deep);letter-spacing:.02em;font-weight:600;}
+
+  /* ── 信頼の証：航海記録のカード ───────────────── */
+  .log{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:26px 24px;
+    margin-bottom:18px;
+    position:relative;
+  }
+  .log::before{ /* 左端に小さな水平線=記録の印 */
+    content:"";position:absolute;left:0;top:26px;width:3px;height:34px;
+    background:linear-gradient(180deg,var(--glow2),var(--ink2));border-radius:0 3px 3px 0;
+  }
+  .log .when{
+    font-size:11.5px;letter-spacing:.18em;color:var(--mist);margin-bottom:12px;
+  }
+  .log .head{
+    font-family:var(--mincho);font-size:18px;color:var(--deep);
+    margin-bottom:10px;letter-spacing:.03em;line-height:1.5;
+  }
+  .log .body{font-size:14.5px;color:var(--ink2);line-height:1.9;}
+  .note-honest{
+    font-size:12.5px;color:var(--mist);margin-top:18px;letter-spacing:.04em;line-height:1.8;
+  }
+  /* 信頼の証：補足と「これから」 */
+  .body.sub{font-size:13.5px;color:var(--mist);margin-top:14px;}
+  .body b{font-family:var(--mincho);font-weight:600;color:var(--deep);letter-spacing:.02em;}
+  .muted{color:var(--mist);font-size:.9em;}
+  .next{font-size:13px;color:var(--mist);line-height:1.9;letter-spacing:.03em;margin:22px 2px 0;}
+  .next .mark{color:var(--glow2);font-weight:700;margin-right:.45em;}
+  .next b{font-family:var(--mincho);font-weight:600;color:var(--ink2);}
+
+  /* ── どう関わるか ───────────────── */
+  .stance{
+    font-family:var(--mincho);
+    font-size:clamp(18px,5.2vw,22px);line-height:2;color:var(--deep);
+    letter-spacing:.04em;margin-bottom:28px;
+  }
+  .stance .soft{color:var(--mist);}
+  .doing{font-size:15px;color:var(--ink2);line-height:2;}
+  .doing b{font-family:var(--mincho);font-weight:600;color:var(--deep);}
+  .lead-do{font-size:15px;color:var(--ink2);line-height:2;margin-bottom:24px;}
+  .together{margin:0 0 24px;}
+  .titem{padding:14px 0;border-top:1px solid var(--line);}
+  .titem:first-child{border-top:none;padding-top:2px;}
+  .titem .nm{display:block;font-family:var(--mincho);font-size:16px;color:var(--deep);letter-spacing:.03em;margin-bottom:4px;}
+  .titem .gl{display:block;font-size:13px;color:var(--mist);line-height:1.7;}
+
+  /* ── 入口：唯一あたたかい一点 ───────────────── */
+  .cta{
+    position:relative;text-align:center;
+    padding:78px 24px 70px;margin-top:20px;
+    overflow:hidden;
+  }
+  .cta::before{
+    content:"";position:absolute;inset:0;z-index:0;
+    background:radial-gradient(80% 70% at 50% 42%, var(--glow) 0%, rgba(246,231,201,.35) 34%, rgba(246,231,201,0) 66%);
+  }
+  .cta-inner{position:relative;z-index:1;max-width:440px;margin:0 auto;}
+  .cta h2{margin-bottom:14px;}
+  .cta .sub{font-size:14.5px;color:var(--ink2);margin-bottom:34px;}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:.5em;
+    min-height:56px;padding:0 38px;
+    background:var(--deep);color:var(--white);
+    font-family:var(--gothic);font-size:16px;font-weight:600;letter-spacing:.12em;
+    border:none;border-radius:13px;text-decoration:none;cursor:pointer;
+    box-shadow:0 8px 28px -10px rgba(19,48,58,.5), 0 0 0 0 rgba(235,207,158,0);
+    transition:transform .2s ease, box-shadow .3s ease;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px -10px rgba(19,48,58,.5), 0 0 0 4px rgba(235,207,158,.45);}
+  .btn:focus-visible{outline:3px solid var(--glow2);outline-offset:3px;}
+  .contact-line{
+    margin-top:24px;font-size:13.5px;color:var(--mist);letter-spacing:.04em;line-height:1.9;
+  }
+
+  /* ── フッター ───────────────── */
+  footer{padding:46px 24px 64px;text-align:center;}
+  footer .name{font-family:var(--mincho);font-size:16px;color:var(--deep);margin-bottom:18px;letter-spacing:.06em;}
+  footer .links{font-size:13.5px;color:var(--ink2);line-height:2.2;}
+  footer .links a{color:var(--ink2);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:1px;}
+  footer .links a:hover{color:var(--deep);border-color:var(--ink2);}
+
+  /* ── 空欄プレースホルダ（あなたが埋める所） ── */
+  .blank{
+    background:rgba(235,207,158,.30);
+    border-bottom:1px dashed var(--mist);
+    border-radius:3px;padding:.04em .3em;
+    color:var(--ink2);font-style:normal;white-space:nowrap;
+  }
+
+  /* ── スクロールで静かに現れる ───────────────── */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .9s ease, transform .9s ease;}
+  .reveal.in{opacity:1;transform:none;}
+
+  @keyframes drawline{to{transform:scaleX(1);opacity:1;}}
+  @keyframes rise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+  @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+
+  @media (max-width:380px){
+    .wrap{padding:0 20px;}
+    .section{padding:54px 0;}
+    .log{padding:22px 20px;}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;}
+    .hero::after{transform:none;opacity:1;}
+    .eyebrow,h1.title,.lede,.scrollcue{opacity:1;}
+    .reveal{opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body>
+
+  <!-- ───────── ヒーロー：核 ───────── -->
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">A NAVIGATOR WHO KEEPS THE QUESTION</div>
+      <h1 class="title"><span class="q">問い</span>を残す航海士</h1>
+      <p class="lede">問いから始めて、<br>形にするところまで、一緒に。</p>
+      <div class="scrollcue">少し下へ<span>↓</span></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- ───────── 信頼の証 ───────── -->
+    <section class="section reveal">
+      <div class="horizon section-rule"></div>
+      <div class="label">信頼の証</div>
+      <h2>続けられた。<br>人を理解できた。<br>そして、信頼された。</h2>
+
+      <div class="log">
+        <div class="when">毎日、続けている</div>
+        <div class="head">note『迷いの航海記録』</div>
+        <p class="body"><span class="num">100日</span>以上、書きつづけています。中心は連載『迷いの航海記録』。迷っている人の話を聞いて、言葉にする。<span class="muted">（いまは、まだ一人）</span></p>
+        <p class="body sub">日々は、19歳の視点で「疑問に思うこと」を。いまは <b>AI</b> と <b>早期離職</b> について。</p>
+      </div>
+
+      <div class="log">
+        <div class="when">一緒に働いた人たちと</div>
+        <div class="head">クラウドワークス</div>
+        <p class="body"><span class="num">14件</span>のお仕事、評価<span class="num">4.9</span>。一緒に仕事をした人たちが、ちゃんと信頼してくれました。</p>
+      </div>
+
+      <p class="next"><span class="mark">▸</span>これから ── 連載<b>『問いを残す図書館』</b>を始めます。変化の速いいまに、自分の問いを残していく場所です。</p>
+
+      <p class="note-honest">※ 数字は、出どころのまま。盛っていません。</p>
+    </section>
+
+    <!-- ───────── どう関わるか ───────── -->
+    <section class="section reveal">
+      <div class="horizon section-rule"></div>
+      <div class="label">運用を、一緒に</div>
+      <p class="stance">上から「こうしなさい」とは、言いません。<br>隣で、<span class="soft">「一緒に、どうしようか」</span>。</p>
+      <p class="lead-do">任せきりにしない運用を。あなたの発信や場所を、隣で一緒に動かしていきます。</p>
+      <div class="together">
+        <div class="titem"><span class="nm">SNSの運用</span><span class="gl">何を、どう続けるか。一緒に。</span></div>
+        <div class="titem"><span class="nm">note・ブログの運用</span><span class="gl">思っていることを、言葉にして残す。</span></div>
+        <div class="titem"><span class="nm">Webサイト・ページの運用</span><span class="gl">作る、直す、整える。</span></div>
+        <div class="titem"><span class="nm">コンテンツの企画・制作</span><span class="gl">何を出すか、から一緒に。</span></div>
+      </div>
+      <p class="doing">決まったパッケージは置いていません。あなたに必要なところから、まず話しながら。</p>
+    </section>
+  </main>
+
+  <!-- ───────── 入口：唯一あたたかい一点 ───────── -->
+  <section class="cta reveal">
+    <div class="cta-inner">
+      <h2>何か引っかかったら、<br>まず一度、話しましょう。</h2>
+      <p class="sub">売り込みはしません。</p>
+      <a class="btn" href="【連絡先リンクをここに】">話してみる</a>
+      <p class="contact-line">連絡方法 ▶ <span class="blank">【 フォーム / DM / メール など 】</span></p>
+    </div>
+  </section>
+
+  <!-- ───────── フッター ───────── -->
+  <footer>
+    <div class="horizon" style="margin-bottom:38px;"></div>
+    <p class="name"><span class="blank">【 お名前・名乗る名義 】</span></p>
+    <p class="links">
+      <a href="【note のリンク】">note ── 迷いの航海記録 ほか</a><br>
+      <a href="【クラウドワークスのリンク】">クラウドワークス</a>
+    </p>
+  </footer>
+
+  <script>
+    // スクロールで静かに現れる
+    (function(){
+      var els = document.querySelectorAll('.reveal');
+      if(!('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('in');}); return; }
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+      },{threshold:.16});
+      els.forEach(function(e){ io.observe(e); });
+    })();
+  </script>
+
+</body>
+</html>
