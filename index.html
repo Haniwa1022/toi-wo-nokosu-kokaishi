@@ -205,6 +205,9 @@
   }
   .btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px -10px rgba(19,48,58,.5), 0 0 0 4px rgba(235,207,158,.45);}
   .btn:focus-visible{outline:3px solid var(--glow2);outline-offset:3px;}
+  .btn-ghost{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 28px;margin-bottom:30px;background:transparent;color:var(--deep);font-family:var(--gothic);font-size:14.5px;font-weight:600;letter-spacing:.08em;border:1px solid var(--line);border-radius:12px;text-decoration:none;transition:border-color .2s ease;}
+  .btn-ghost:hover{border-color:var(--ink2);}
+  .btn-ghost:focus-visible{outline:3px solid var(--glow2);outline-offset:3px;}
   .contact-line{
     margin-top:24px;font-size:13.5px;color:var(--mist);letter-spacing:.04em;line-height:1.9;
   }
@@ -320,6 +323,7 @@
   <!-- ───────── フッター ───────── -->
   <footer>
     <div class="horizon" style="margin-bottom:38px;"></div>
+    <a class="btn-ghost" href="profile.html">わたしについて</a>
     <p class="name"><span class="blank">【 お名前・名乗る名義 】</span></p>
     <p class="links">
       <a href="【note のリンク】">note ── 迷いの航海記録 ほか</a><br>
