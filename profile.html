@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>わたしについて｜問いを残す航海士</title>
+<meta name="description" content="「問いを残す航海士」のプロフィール。人の話を聞いて言葉にする、19歳の歩みと、大事にしていること。">
+<meta name="theme-color" content="#E7ECED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23E7ECED'/%3E%3Cline x1='5' y1='18' x2='27' y2='18' stroke='%2313303A' stroke-width='1.4'/%3E%3Ccircle cx='16' cy='18' r='1.8' fill='%23E0B36A'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --fog:#E7ECED; --sky:#EEF2F2; --sea:#DBE5E6; --panel:#EFF3F3;
+    --deep:#13303A; --ink2:#2E555F; --mist:#7C949A; --line:#B7C7CA;
+    --glow:#F6E7C9; --glow2:#EBCF9E; --white:#FBFCFC;
+    --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+    --gothic:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","YuGothic","Noto Sans JP",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    font-family:var(--gothic);color:var(--deep);background:var(--fog);
+    line-height:1.9;font-size:16px;letter-spacing:.02em;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:600px;margin:0 auto;padding:0 24px;}
+
+  .horizon{position:relative;height:1px;background:var(--line);max-width:560px;margin:0 auto;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent);
+            mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent);}
+  .horizon::after{content:"";position:absolute;left:0;right:0;top:-1px;height:3px;background:var(--glow);opacity:.5;filter:blur(3px);}
+
+  a.back{display:inline-block;margin:36px 0 0;font-size:13px;color:var(--mist);text-decoration:none;letter-spacing:.06em;}
+  a.back:hover{color:var(--deep);}
+
+  .phead{padding:30px 0 8px;}
+  .eyebrow{font-size:12px;letter-spacing:.34em;color:var(--mist);margin-bottom:22px;padding-left:.34em;}
+  h1.pname{font-family:var(--mincho);font-weight:600;font-size:clamp(30px,8.5vw,46px);line-height:1.4;letter-spacing:.05em;color:var(--deep);margin-bottom:24px;}
+  .ptag{font-family:var(--mincho);font-size:clamp(16px,4.4vw,19px);line-height:2;color:var(--ink2);letter-spacing:.04em;}
+
+  .section{padding:50px 0;}
+  .section-rule{margin:0 0 46px;}
+  .label{font-size:12px;letter-spacing:.34em;color:var(--mist);margin-bottom:24px;padding-left:.34em;}
+  p{font-size:15px;color:var(--ink2);line-height:2;margin-bottom:18px;}
+  p:last-child{margin-bottom:0;}
+  p b, .stext b{font-family:var(--mincho);font-weight:600;color:var(--deep);letter-spacing:.02em;}
+  .blank{background:rgba(235,207,158,.30);border-bottom:1px dashed var(--mist);border-radius:3px;padding:.04em .3em;color:var(--ink2);}
+
+  .together{margin:0;}
+  .titem{padding:14px 0;border-top:1px solid var(--line);}
+  .titem:first-child{border-top:none;padding-top:2px;}
+  .titem .nm{display:block;font-family:var(--mincho);font-size:16px;color:var(--deep);letter-spacing:.03em;margin-bottom:4px;}
+  .titem .gl{display:block;font-size:13px;color:var(--mist);line-height:1.7;}
+  .note-honest{font-size:12.5px;color:var(--mist);margin-top:16px;letter-spacing:.04em;}
+
+  .values p{margin-bottom:14px;}
+
+  .pfoot{padding:30px 0 70px;}
+  .btn-ghost{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 28px;
+    background:transparent;color:var(--deep);font-family:var(--gothic);font-size:14.5px;font-weight:600;letter-spacing:.08em;
+    border:1px solid var(--line);border-radius:12px;text-decoration:none;transition:border-color .2s ease,color .2s ease;}
+  .btn-ghost:hover{border-color:var(--ink2);}
+  .links{margin-top:26px;font-size:13.5px;color:var(--ink2);line-height:2.2;}
+  .links a{color:var(--ink2);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:1px;}
+  .links a:hover{color:var(--deep);border-color:var(--ink2);}
+</style>
+</head>
+<body>
+  <div class="wrap">
+
+    <a class="back" href="index.html">← 問いを残す航海士</a>
+
+    <header class="phead">
+      <div class="eyebrow">ABOUT</div>
+      <h1 class="pname"><span class="blank">【 お名前・名乗る名義 】</span></h1>
+      <p class="ptag">人の話を聞いて、言葉にする。<br>「迷いの航海記録」を書く、19歳です。</p>
+    </header>
+
+    <section class="section">
+      <div class="horizon section-rule"></div>
+      <div class="label">はじめに</div>
+      <p><span class="blank">【 ここに自己紹介を2〜3行。なぜこの活動をしているのか／どんな人の力になりたいか、を自分の言葉で。】</span></p>
+      <p>答えを上から渡すより、隣で一緒に問いを見つけていくほうが好きです。だから「問いを残す航海士」と名乗っています。</p>
+    </section>
+
+    <section class="section">
+      <div class="horizon section-rule"></div>
+      <div class="label">これまで</div>
+      <div class="together">
+        <div class="titem"><span class="nm"><span class="blank">【 年・できごと 】</span></span><span class="gl"><span class="blank">【 ひとことで 】</span></span></div>
+        <div class="titem"><span class="nm"><span class="blank">【 年・できごと 】</span></span><span class="gl"><span class="blank">【 ひとことで 】</span></span></div>
+        <div class="titem"><span class="nm"><span class="blank">【 年・できごと 】</span></span><span class="gl"><span class="blank">【 ひとことで 】</span></span></div>
+      </div>
+      <p class="note-honest">※ 飾らず、正直に。話せる範囲で大丈夫です。</p>
+    </section>
+
+    <section class="section">
+      <div class="horizon section-rule"></div>
+      <div class="label">大事にしていること</div>
+      <div class="values">
+        <p><b>問いを残す</b> — すぐ答えを出さず、考え続けられる問いを置く。</p>
+        <p><b>隣で、一緒に</b> — 上から指図せず、伴走する。</p>
+        <p><b>正直に、盛らない</b> — 数字も言葉も、出どころのまま。</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="horizon section-rule"></div>
+      <div class="label">いま、関心があること</div>
+      <p>変化の速いいま、書いているのは <b>AI</b> と <b>早期離職</b> について。19歳の視点で、疑問に思うことを言葉にしています。<span class="blank">【 ほかに関心があれば追記 】</span></p>
+    </section>
+
+    <footer class="pfoot">
+      <div class="horizon" style="margin-bottom:34px;"></div>
+      <a class="btn-ghost" href="index.html">← 問いを残す航海士に戻る</a>
+      <p class="links">
+        <a href="【note のリンク】">note ── 迷いの航海記録 ほか</a><br>
+        <a href="【クラウドワークスのリンク】">クラウドワークス</a>
+      </p>
+    </footer>
+
+  </div>
+</body>
+</html>
