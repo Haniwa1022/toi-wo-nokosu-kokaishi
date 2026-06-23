@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>サービス｜問いを残す航海士</title>
+<meta name="description" content="SNS・note・Webサイト・コンテンツの運用を、隣で一緒に。サービスの詳細と進め方。料金は準備中です。">
+<meta name="theme-color" content="#E7ECED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23E7ECED'/%3E%3Cline x1='5' y1='18' x2='27' y2='18' stroke='%2313303A' stroke-width='1.4'/%3E%3Ccircle cx='16' cy='18' r='1.8' fill='%23E0B36A'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --fog:#E7ECED; --sky:#EEF2F2; --sea:#DBE5E6; --panel:#EFF3F3;
+    --deep:#13303A; --ink2:#2E555F; --mist:#7C949A; --line:#B7C7CA;
+    --glow:#F6E7C9; --glow2:#EBCF9E; --white:#FBFCFC;
+    --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+    --gothic:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","YuGothic","Noto Sans JP",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{font-family:var(--gothic);color:var(--deep);background:var(--fog);
+    line-height:1.9;font-size:16px;letter-spacing:.02em;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  .wrap{max-width:600px;margin:0 auto;padding:0 24px;}
+
+  .horizon{position:relative;height:1px;background:var(--line);max-width:560px;margin:0 auto;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent);
+            mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent);}
+  .horizon::after{content:"";position:absolute;left:0;right:0;top:-1px;height:3px;background:var(--glow);opacity:.5;filter:blur(3px);}
+
+  a.back{display:inline-block;margin:36px 0 0;font-size:13px;color:var(--mist);text-decoration:none;letter-spacing:.06em;}
+  a.back:hover{color:var(--deep);}
+
+  .phead{padding:30px 0 8px;}
+  .eyebrow{font-size:12px;letter-spacing:.34em;color:var(--mist);margin-bottom:22px;padding-left:.34em;}
+  h1.pname{font-family:var(--mincho);font-weight:600;font-size:clamp(30px,8.5vw,46px);line-height:1.4;letter-spacing:.05em;color:var(--deep);margin-bottom:24px;}
+  .ptag{font-family:var(--mincho);font-size:clamp(16px,4.4vw,19px);line-height:2;color:var(--ink2);letter-spacing:.04em;}
+
+  .section{padding:50px 0;}
+  .section-rule{margin:0 0 46px;}
+  .label{font-size:12px;letter-spacing:.34em;color:var(--mist);margin-bottom:24px;padding-left:.34em;}
+  p{font-size:15px;color:var(--ink2);line-height:2;margin-bottom:18px;}
+  p:last-child{margin-bottom:0;}
+  p b{font-family:var(--mincho);font-weight:600;color:var(--deep);letter-spacing:.02em;}
+  .note-honest{font-size:12.5px;color:var(--mist);margin-top:18px;letter-spacing:.04em;line-height:1.8;}
+
+  /* 4本柱・進め方 */
+  .together{margin:0;}
+  .titem{padding:16px 0;border-top:1px solid var(--line);}
+  .titem:first-child{border-top:none;padding-top:2px;}
+  .titem .nm{display:block;font-family:var(--mincho);font-size:16px;color:var(--deep);letter-spacing:.03em;margin-bottom:5px;}
+  .titem .gl{display:block;font-size:13.5px;color:var(--ink2);line-height:1.85;}
+
+  /* 料金カード */
+  .plan{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px 22px;margin-bottom:16px;position:relative;}
+  .plan .rec{position:absolute;top:-11px;right:16px;background:var(--glow2);color:var(--deep);font-size:11px;letter-spacing:.12em;padding:3px 11px;border-radius:999px;}
+  .plan .pname{font-family:var(--mincho);font-size:18px;color:var(--deep);letter-spacing:.03em;margin-bottom:7px;}
+  .plan .pdesc{font-size:13.5px;color:var(--ink2);line-height:1.8;margin-bottom:14px;}
+  .plan .pinc{font-size:13.5px;color:var(--ink2);line-height:1.95;}
+  .plan .price{margin-top:15px;padding-top:13px;border-top:1px solid var(--line);font-family:var(--mincho);font-size:15px;color:var(--mist);letter-spacing:.05em;}
+
+  /* FAQ */
+  .qa{padding:18px 0;border-top:1px solid var(--line);}
+  .qa:first-child{border-top:none;padding-top:2px;}
+  .qa .q{font-family:var(--mincho);font-size:15.5px;color:var(--deep);letter-spacing:.02em;margin-bottom:7px;}
+  .qa .a{font-size:13.5px;color:var(--ink2);line-height:1.9;}
+
+  /* CTA・フッター */
+  .cta{text-align:center;padding:8px 0 4px;}
+  .cta .ctatxt{font-family:var(--mincho);font-size:clamp(18px,5vw,22px);line-height:1.9;color:var(--deep);margin-bottom:24px;}
+  .btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 38px;
+    background:var(--deep);color:var(--white);font-family:var(--gothic);font-size:16px;font-weight:600;letter-spacing:.12em;
+    border:none;border-radius:13px;text-decoration:none;box-shadow:0 8px 28px -10px rgba(19,48,58,.5);
+    transition:transform .2s ease,box-shadow .3s ease;}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px -10px rgba(19,48,58,.5),0 0 0 4px rgba(235,207,158,.45);}
+  .pfoot{padding:30px 0 70px;text-align:center;}
+  .btn-ghost{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 28px;
+    background:transparent;color:var(--deep);font-family:var(--gothic);font-size:14.5px;font-weight:600;letter-spacing:.08em;
+    border:1px solid var(--line);border-radius:12px;text-decoration:none;transition:border-color .2s ease;}
+  .btn-ghost:hover{border-color:var(--ink2);}
+</style>
+</head>
+<body>
+  <div class="wrap">
+
+    <a class="back" href="index.html">← 問いを残す航海士</a>
+
+    <header class="phead">
+      <div class="eyebrow">SERVICES</div>
+      <h1 class="pname">運用を、一緒に</h1>
+      <p class="ptag">任せきりにしない運用を。<br>あなたの発信や場所を、隣で一緒に動かしていきます。</p>
+    </header>
+
+    <!-- 何を一緒にやるか -->
+    <section class="section">
+      <div class="horizon section-rule"></div>
+      <div class="label">何を一緒にやるか</div>
+      <div class="together">
+        <div class="titem"><span class="nm">SNSの運用</span><span class="gl">X・Instagram などで、何をどう続けるか。投稿の方針づくりから、文章の作成サポートまで、隣で一緒に。</span></div>
+        <div class="titem"><span class="nm">note・ブログの運用</span><span class="gl">思っていることを、読みやすいストーリーに。お話を聞いて言葉にする、執筆の代行も。</span></div>
+        <div class="titem"><span class="nm">Webサイト・ページの運用</span><span class="gl">作る、直す、整える。表示崩れの修正やお知らせの更新など、気軽に頼める相手に。</span></div>
+        <div class="titem"><span class="nm">コンテンツの企画・制作</span><span class="gl">何を出すか、から一緒に。発信の軸を整えるところから考えます。</span></div>
+      </div>
+    </section>
+
+    <!-- 進め方 -->
+    <section class="section">
+      <div class="horizon section-rule"></div>
+      <div class="label">進め方</div>
+      <div class="together">
+        <div class="titem"><span class="nm">1. まず話す</span><span class="gl">売り込みはしません。いま気になっていること・モヤモヤを、そのまま聞かせてください。</span></div>
+        <div class="titem"><span class="nm">2. 一緒に決める</span><span class="gl">必要なところ・進め方・分量を、相談しながら決めます。決まったパッケージはありません。</span></div>
+        <div class="titem"><span class="nm">3. 動かす</span><span class="gl">隣で伴走しながら、形にしていきます。</span></div>
+      </div>
+    </section>
+
+    <!-- 料金（準備中） -->
+    <section class="section">
+      <div class="horizon section-rule"></div>
+      <div class="label">料金</div>
+
+      <div class="plan">
+        <div class="pname">整えると、見守り</div>
+        <div class="pdesc">いまあるサイトをちゃんと機能させ、いつでも相談できる安心を。</div>
+        <div class="pinc">サイトの修正・更新／月1回の作戦会議</div>
+        <div class="price">料金:準備中</div>
+      </div>
+
+      <div class="plan">
+        <div class="rec">★ おすすめ</div>
+        <div class="pname">伴走と、航海</div>
+        <div class="pdesc">サイトの管理に加えて、あなたの強み「言葉にする」を発信に組み込む。</div>
+        <div class="pinc">「整えると、見守り」のすべて／note・ブログの執筆代行／SNS投稿のサポート</div>
+        <div class="price">料金:準備中</div>
+      </div>
+
+      <p class="note-honest">※ 内容・料金は準備中です。確定までは、必要なところから一緒に決めます。まずはご相談ください。</p>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+      <div class="horizon section-rule"></div>
+      <div class="label">よくある質問</div>
+      <div class="qa"><div class="q">決まったパッケージはありますか？</div><div class="a">いまは固定のパッケージは置いていません。あなたに必要なところから、一緒に決めます。</div></div>
+      <div class="qa"><div class="q">どんな人が対象ですか？</div><div class="a">「発信したいけれど続け方がわからない」「言葉にする時間がない」企業や個人の方に。</div></div>
+      <div class="qa"><div class="q">まず何から始まりますか？</div><div class="a">まず一度の会話から。合いそうなら、小さく試すところから始めます。</div></div>
+      <div class="qa"><div class="q">オンラインでも大丈夫ですか？</div><div class="a">はい。オンラインでも対面でも、ご都合に合わせて。</div></div>
+    </section>
+
+    <!-- 入口 -->
+    <section class="section">
+      <div class="horizon section-rule"></div>
+      <div class="cta">
+        <p class="ctatxt">何か引っかかったら、<br>まず一度、話しましょう。</p>
+        <a class="btn" href="https://line.me/ti/p/vZE-vX7RQT">話してみる</a>
+      </div>
+    </section>
+
+    <footer class="pfoot">
+      <div class="horizon" style="margin-bottom:34px;"></div>
+      <a class="btn-ghost" href="index.html">← 問いを残す航海士に戻る</a>
+    </footer>
+
+  </div>
+</body>
+</html>
